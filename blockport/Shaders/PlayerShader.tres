@@ -1,4 +1,43 @@
-[gd_resource type="VisualShader" load_steps=7 format=3 uid="uid://h442157yhanu"]
+[gd_resource type="VisualShader" load_steps=16 format=3 uid="uid://h442157yhanu"]
+
+[sub_resource type="VisualShaderNodeMultiplyAdd" id="VisualShaderNodeMultiplyAdd_yghlg"]
+default_input_values = [0, Vector2(0, 0), 1, Vector2(2, 2), 2, Vector2(-1, -1)]
+op_type = 1
+
+[sub_resource type="VisualShaderNodeVectorFunc" id="VisualShaderNodeVectorFunc_kkvdi"]
+default_input_values = [0, Vector2(0, 0)]
+op_type = 0
+function = 4
+
+[sub_resource type="VisualShaderNodeVectorLen" id="VisualShaderNodeVectorLen_qk142"]
+default_input_values = [0, Vector2(0, 0)]
+op_type = 0
+
+[sub_resource type="VisualShaderNodeSmoothStep" id="VisualShaderNodeSmoothStep_3srd0"]
+output_port_for_preview = 0
+default_input_values = [0, 0.39, 1, 0.345, 2, 0.5]
+
+[sub_resource type="VisualShaderNodeMix" id="VisualShaderNodeMix_oo0wj"]
+output_port_for_preview = 0
+default_input_values = [0, Vector3(0, 0, 0), 1, Vector3(1, 1, 1), 2, Vector3(0.5, 0.5, 0.5)]
+op_type = 3
+
+[sub_resource type="VisualShaderNodeColorParameter" id="VisualShaderNodeColorParameter_besqi"]
+parameter_name = "Pupil"
+default_value_enabled = true
+default_value = Color(0, 0.660554, 0.660957, 1)
+
+[sub_resource type="VisualShaderNodeColorParameter" id="VisualShaderNodeColorParameter_dniv4"]
+parameter_name = "Pupil2"
+default_value_enabled = true
+default_value = Color(0.729848, 0.485577, 0.658768, 1)
+
+[sub_resource type="VisualShaderNodeVectorOp" id="VisualShaderNodeVectorOp_8otk4"]
+default_input_values = [0, Vector2(0, 0), 1, Vector2(0, 0)]
+op_type = 0
+
+[sub_resource type="VisualShaderNodeVec2Parameter" id="VisualShaderNodeVec2Parameter_013j7"]
+parameter_name = "PupilOffset"
 
 [sub_resource type="VisualShaderNodeInput" id="VisualShaderNodeInput_vn11c"]
 input_name = "uv"
@@ -17,16 +56,18 @@ default_input_values = [0, Vector2(0, 0)]
 op_type = 0
 
 [sub_resource type="VisualShaderNodeSmoothStep" id="VisualShaderNodeSmoothStep_kskyp"]
-default_input_values = [0, 0.43, 1, 0.375, 2, 0.5]
+output_port_for_preview = 0
+default_input_values = [0, 0.925, 1, 0.795, 2, 0.5]
 
-[sub_resource type="VisualShaderNodeStep" id="VisualShaderNodeStep_2cnqe"]
-default_input_values = [0, Vector2(0, 0), 1, Vector2(0, 0)]
-op_type = 1
+[sub_resource type="VisualShaderNodeInput" id="VisualShaderNodeInput_022nf"]
+input_name = "uv"
 
 [resource]
 code = "shader_type canvas_item;
 render_mode blend_mix;
 
+uniform vec4 Pupil : source_color = vec4(0.000000, 0.660554, 0.660957, 1.000000);
+uniform vec2 PupilOffset;
 
 
 
@@ -50,29 +91,88 @@ void fragment() {
 
 
 // SmoothStep:7
-	float n_in7p0 = 0.43000;
-	float n_in7p1 = 0.37500;
+	float n_in7p0 = 0.92500;
+	float n_in7p1 = 0.79500;
 	float n_out7p0 = smoothstep(n_in7p0, n_in7p1, n_out6p0);
 
 
+// ColorParameter:16
+	vec4 n_out16p0 = Pupil;
+
+
+// Input:9
+	vec2 n_out9p0 = UV;
+
+
+// MultiplyAdd:10
+	vec2 n_in10p1 = vec2(2.00000, 2.00000);
+	vec2 n_in10p2 = vec2(-1.00000, -1.00000);
+	vec2 n_out10p0 = fma(n_out9p0, n_in10p1, n_in10p2);
+
+
+// Vector2Parameter:19
+	vec2 n_out19p0 = PupilOffset;
+
+
+// VectorOp:18
+	vec2 n_out18p0 = n_out10p0 + n_out19p0;
+
+
+// VectorFunc:11
+	vec2 n_out11p0 = abs(n_out18p0);
+
+
+// VectorLen:12
+	float n_out12p0 = length(n_out11p0);
+
+
+// SmoothStep:13
+	float n_in13p0 = 0.39000;
+	float n_in13p1 = 0.34500;
+	float n_out13p0 = smoothstep(n_in13p0, n_in13p1, n_out12p0);
+
+
+// Mix:15
+	vec3 n_out15p0 = mix(vec3(n_out7p0), vec3(n_out16p0.xyz), vec3(n_out13p0));
+
+
 // Output:0
-	COLOR.rgb = vec3(n_out7p0);
+	COLOR.rgb = n_out15p0;
 
 
 }
 "
+graph_offset = Vector2(-1234.81, 47.4045)
 mode = 1
 flags/light_only = false
 nodes/fragment/2/node = SubResource("VisualShaderNodeInput_vn11c")
-nodes/fragment/2/position = Vector2(-840, 60)
+nodes/fragment/2/position = Vector2(-1660, -80)
 nodes/fragment/4/node = SubResource("VisualShaderNodeMultiplyAdd_mhody")
-nodes/fragment/4/position = Vector2(-520, 60)
+nodes/fragment/4/position = Vector2(-1340, -80)
 nodes/fragment/5/node = SubResource("VisualShaderNodeVectorFunc_cyiaw")
-nodes/fragment/5/position = Vector2(-320, 60)
+nodes/fragment/5/position = Vector2(-1140, -80)
 nodes/fragment/6/node = SubResource("VisualShaderNodeVectorLen_sl4bd")
-nodes/fragment/6/position = Vector2(-120, 80)
+nodes/fragment/6/position = Vector2(-940, -60)
 nodes/fragment/7/node = SubResource("VisualShaderNodeSmoothStep_kskyp")
-nodes/fragment/7/position = Vector2(160, 20)
-nodes/fragment/8/node = SubResource("VisualShaderNodeStep_2cnqe")
-nodes/fragment/8/position = Vector2(160, 220)
-nodes/fragment/connections = PackedInt32Array(2, 0, 4, 0, 4, 0, 5, 0, 5, 0, 6, 0, 6, 0, 7, 2, 6, 0, 8, 1, 7, 0, 0, 0)
+nodes/fragment/7/position = Vector2(-660, -280)
+nodes/fragment/9/node = SubResource("VisualShaderNodeInput_022nf")
+nodes/fragment/9/position = Vector2(-1580, 500)
+nodes/fragment/10/node = SubResource("VisualShaderNodeMultiplyAdd_yghlg")
+nodes/fragment/10/position = Vector2(-1260, 500)
+nodes/fragment/11/node = SubResource("VisualShaderNodeVectorFunc_kkvdi")
+nodes/fragment/11/position = Vector2(-840, 500)
+nodes/fragment/12/node = SubResource("VisualShaderNodeVectorLen_qk142")
+nodes/fragment/12/position = Vector2(-640, 520)
+nodes/fragment/13/node = SubResource("VisualShaderNodeSmoothStep_3srd0")
+nodes/fragment/13/position = Vector2(-360, 460)
+nodes/fragment/15/node = SubResource("VisualShaderNodeMix_oo0wj")
+nodes/fragment/15/position = Vector2(-49.705, 268.256)
+nodes/fragment/16/node = SubResource("VisualShaderNodeColorParameter_besqi")
+nodes/fragment/16/position = Vector2(-520, 120)
+nodes/fragment/17/node = SubResource("VisualShaderNodeColorParameter_dniv4")
+nodes/fragment/17/position = Vector2(-140, -100)
+nodes/fragment/18/node = SubResource("VisualShaderNodeVectorOp_8otk4")
+nodes/fragment/18/position = Vector2(-1040, 500)
+nodes/fragment/19/node = SubResource("VisualShaderNodeVec2Parameter_013j7")
+nodes/fragment/19/position = Vector2(-1340, 700)
+nodes/fragment/connections = PackedInt32Array(2, 0, 4, 0, 4, 0, 5, 0, 5, 0, 6, 0, 6, 0, 7, 2, 9, 0, 10, 0, 11, 0, 12, 0, 12, 0, 13, 2, 13, 0, 15, 2, 15, 0, 0, 0, 16, 0, 15, 1, 7, 0, 15, 0, 10, 0, 18, 0, 18, 0, 11, 0, 19, 0, 18, 1)
