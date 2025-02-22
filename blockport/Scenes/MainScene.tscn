@@ -1,0 +1,87 @@
+[gd_scene load_steps=9 format=3 uid="uid://btxekcvieocq5"]
+
+[ext_resource type="Script" path="res://Scripts/Player.gd" id="1_ocupl"]
+[ext_resource type="Shader" uid="uid://h442157yhanu" path="res://Shaders/PlayerShader.tres" id="1_r6cyv"]
+[ext_resource type="Texture2D" uid="uid://cnwtn2sdnsm0l" path="res://icon.svg" id="2_7ib2y"]
+[ext_resource type="Texture2D" uid="uid://cgkfmlgju2yy5" path="res://Textures/Square.png" id="4_d3o6l"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_r37d3"]
+size = Vector2(63, 63)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_kgenl"]
+shader = ExtResource("1_r6cyv")
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_orn0e"]
+size = Vector2(70, 68)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_w5ghk"]
+size = Vector2(49.9764, 48)
+
+[node name="MainScene" type="Node2D"]
+
+[node name="Player" type="CharacterBody2D" parent="."]
+position = Vector2(1, -50)
+script = ExtResource("1_ocupl")
+accel = 30000.0
+maxSpeed = 2.0
+resistance = 0.5
+gravity = 10000.0
+jumpSpeed = -2000.0
+
+[node name="PlayerCollider" type="CollisionShape2D" parent="Player"]
+position = Vector2(0.5, 0.5)
+shape = SubResource("RectangleShape2D_r37d3")
+
+[node name="PlayerSprite" type="Sprite2D" parent="Player"]
+material = SubResource("ShaderMaterial_kgenl")
+position = Vector2(-9.53674e-07, -9.53674e-07)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("2_7ib2y")
+
+[node name="GroundCheckArea" type="Area2D" parent="Player"]
+collision_layer = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player/GroundCheckArea"]
+shape = SubResource("RectangleShape2D_orn0e")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+position = Vector2(0, 306)
+scale = Vector2(28.8307, 0.757158)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(7.19415e-07, -1)
+shape = SubResource("RectangleShape2D_w5ghk")
+
+[node name="Sprite2D" type="Sprite2D" parent="StaticBody2D"]
+texture = ExtResource("4_d3o6l")
+
+[node name="StaticBody2D2" type="StaticBody2D" parent="."]
+position = Vector2(-558, 81)
+rotation = 1.5708
+scale = Vector2(28.8307, 0.757158)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D2"]
+position = Vector2(7.19415e-07, -1)
+shape = SubResource("RectangleShape2D_w5ghk")
+
+[node name="Sprite2D" type="Sprite2D" parent="StaticBody2D2"]
+texture = ExtResource("4_d3o6l")
+
+[node name="StaticBody2D3" type="StaticBody2D" parent="."]
+position = Vector2(555, 81)
+rotation = 1.5708
+scale = Vector2(28.8307, 0.757158)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D3"]
+position = Vector2(7.19415e-07, -1)
+shape = SubResource("RectangleShape2D_w5ghk")
+
+[node name="Sprite2D" type="Sprite2D" parent="StaticBody2D3"]
+texture = ExtResource("4_d3o6l")
+
+[connection signal="body_entered" from="Player/GroundCheckArea" to="Player" method="DetectCollision"]
+[connection signal="body_exited" from="Player/GroundCheckArea" to="Player" method="DetectCollisionLeave"]
