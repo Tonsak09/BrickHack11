@@ -1,244 +1,52 @@
-[gd_scene load_steps=25 format=3 uid="uid://btxekcvieocq5"]
+[gd_scene load_steps=10 format=3 uid="uid://btxekcvieocq5"]
 
+[ext_resource type="Shader" uid="uid://cfop3o8vccnra" path="res://Scenes/BG.tres" id="1_1tows"]
+[ext_resource type="Script" path="res://Scripts/TransitionManager.gd" id="1_nc1nq"]
 [ext_resource type="PackedScene" uid="uid://d0lq1qmpbwv7b" path="res://Prefabs/Player.tscn" id="1_x8v6x"]
-[ext_resource type="Texture2D" uid="uid://cgkfmlgju2yy5" path="res://Textures/Square.png" id="4_d3o6l"]
-[ext_resource type="Shader" uid="uid://npqd2amgpctx" path="res://Shaders/Block.tres" id="6_gtldp"]
-[ext_resource type="Texture2D" uid="uid://k4uflwi3vles" path="res://Textures/SimplyPatterns.png" id="7_qnaa0"]
+[ext_resource type="Texture2D" uid="uid://cr6b4ab0as7be" path="res://Textures/GreyCheckered.png" id="2_3ddqe"]
+[ext_resource type="Texture2D" uid="uid://dftcwpfbqb3yy" path="res://Textures/GreyChecker.png" id="2_vyu6f"]
+[ext_resource type="PackedScene" uid="uid://b7yudnxeaviqa" path="res://Prefabs/BlockPassable.tscn" id="4_um7c8"]
+[ext_resource type="PackedScene" uid="uid://dfiobao1syve1" path="res://Prefabs/Target.tscn" id="5_yhgs3"]
+[ext_resource type="Script" path="res://Scripts/CameraManager.gd" id="6_niq3y"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_w5ghk"]
-size = Vector2(50, 50)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_dfsfd"]
-size = Vector2(145, 100)
-
-[sub_resource type="Gradient" id="Gradient_1ddte"]
-
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_hs41w"]
-
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_77j3b"]
-color_ramp = SubResource("Gradient_1ddte")
-noise = SubResource("FastNoiseLite_hs41w")
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_b871n"]
-shader = ExtResource("6_gtldp")
-shader_parameter/PaletteCount = 5
-shader_parameter/CellCount = 5.0
-shader_parameter/ScrollSpeed = 0.2
-shader_parameter/RimSize = Vector2(90, 90)
-shader_parameter/Size = Vector2(100, 100)
-shader_parameter/PalleteNoise = SubResource("NoiseTexture2D_77j3b")
-shader_parameter/PatternPalette = ExtResource("7_qnaa0")
-
-[sub_resource type="VisualShaderNodeFloatFunc" id="VisualShaderNodeFloatFunc_o6q7x"]
-function = 18
-
-[sub_resource type="VisualShaderNodeVec2Parameter" id="VisualShaderNodeVec2Parameter_rhlpy"]
-parameter_name = "Size"
-default_value_enabled = true
-default_value = Vector2(100, 100)
-
-[sub_resource type="VisualShaderNodeVectorOp" id="VisualShaderNodeVectorOp_3swhg"]
-output_port_for_preview = 0
-default_input_values = [0, Vector2(0, 0), 1, Vector2(0, 0)]
-op_type = 0
-operator = 2
-
-[sub_resource type="VisualShaderNodeVec2Parameter" id="VisualShaderNodeVec2Parameter_2ffrr"]
-parameter_name = "RimSize"
-default_value_enabled = true
-default_value = Vector2(100, 100)
-
-[sub_resource type="VisualShaderNodeVectorDecompose" id="VisualShaderNodeVectorDecompose_80eum"]
-default_input_values = [0, Vector2(0, 0)]
-op_type = 0
-
-[sub_resource type="VisualShaderNodeMultiplyAdd" id="VisualShaderNodeMultiplyAdd_t6ks0"]
-default_input_values = [0, Vector2(0, 0), 1, Vector2(2, 2), 2, Vector2(-1, -1)]
-op_type = 1
-
-[sub_resource type="VisualShaderNodeVectorFunc" id="VisualShaderNodeVectorFunc_vcixk"]
-default_input_values = [0, Vector2(0, 0)]
-op_type = 0
-function = 4
-
-[sub_resource type="VisualShaderNodeInput" id="VisualShaderNodeInput_1w6ty"]
-input_name = "uv"
-
-[sub_resource type="VisualShaderNodeVectorDecompose" id="VisualShaderNodeVectorDecompose_chh34"]
-
-[sub_resource type="VisualShaderNodeStep" id="VisualShaderNodeStep_ryagk"]
-default_input_values = [0, 0.9, 1, 0.0]
-
-[sub_resource type="VisualShaderNodeStep" id="VisualShaderNodeStep_s77dy"]
-default_input_values = [0, 0.9, 1, 0.0]
-
-[sub_resource type="VisualShaderNodeFloatOp" id="VisualShaderNodeFloatOp_84dhp"]
-
-[sub_resource type="VisualShader" id="VisualShader_fanq1"]
-code = "shader_type canvas_item;
-render_mode blend_mix;
-
-uniform vec2 RimSize = vec2(100.000000, 100.000000);
-uniform vec2 Size = vec2(100.000000, 100.000000);
-
-
-
-void fragment() {
-// Vector2Parameter:13
-	vec2 n_out13p0 = RimSize;
-
-
-// VectorDecompose:14
-	float n_out14p0 = n_out13p0.x;
-	float n_out14p1 = n_out13p0.y;
-
-
-// Vector2Parameter:11
-	vec2 n_out11p0 = Size;
-
-
-// Input:4
-	vec2 n_out4p0 = UV;
-
-
-// MultiplyAdd:2
-	vec2 n_in2p1 = vec2(2.00000, 2.00000);
-	vec2 n_in2p2 = vec2(-1.00000, -1.00000);
-	vec2 n_out2p0 = fma(n_out4p0, n_in2p1, n_in2p2);
-
-
-// VectorFunc:3
-	vec2 n_out3p0 = abs(n_out2p0);
-
-
-// VectorOp:12
-	vec2 n_out12p0 = n_out11p0 * n_out3p0;
-
-
-// VectorDecompose:6
-	float n_out6p0 = vec3(n_out12p0, 0.0).x;
-	float n_out6p1 = vec3(n_out12p0, 0.0).y;
-	float n_out6p2 = vec3(n_out12p0, 0.0).z;
-
-
-// Step:7
-	float n_out7p0 = step(n_out14p0, n_out6p0);
-
-
-// Step:8
-	float n_out8p0 = step(n_out14p1, n_out6p1);
-
-
-// FloatOp:9
-	float n_out9p0 = n_out7p0 + n_out8p0;
-
-
-// FloatFunc:10
-	float n_out10p0 = min(max(n_out9p0, 0.0), 1.0);
-
-
-// Output:0
-	COLOR.rgb = vec3(n_out10p0);
-
-
-}
-"
-graph_offset = Vector2(-1362.3, 83.576)
-mode = 1
-flags/light_only = false
-nodes/fragment/0/position = Vector2(480, 220)
-nodes/fragment/2/node = SubResource("VisualShaderNodeMultiplyAdd_t6ks0")
-nodes/fragment/2/position = Vector2(-1380, -40)
-nodes/fragment/3/node = SubResource("VisualShaderNodeVectorFunc_vcixk")
-nodes/fragment/3/position = Vector2(-1180, -40)
-nodes/fragment/4/node = SubResource("VisualShaderNodeInput_1w6ty")
-nodes/fragment/4/position = Vector2(-1740, -40)
-nodes/fragment/6/node = SubResource("VisualShaderNodeVectorDecompose_chh34")
-nodes/fragment/6/position = Vector2(-540, 380)
-nodes/fragment/7/node = SubResource("VisualShaderNodeStep_ryagk")
-nodes/fragment/7/position = Vector2(-280, 360)
-nodes/fragment/8/node = SubResource("VisualShaderNodeStep_s77dy")
-nodes/fragment/8/position = Vector2(-280, 520)
-nodes/fragment/9/node = SubResource("VisualShaderNodeFloatOp_84dhp")
-nodes/fragment/9/position = Vector2(-60, 440)
-nodes/fragment/10/node = SubResource("VisualShaderNodeFloatFunc_o6q7x")
-nodes/fragment/10/position = Vector2(140, 480)
-nodes/fragment/11/node = SubResource("VisualShaderNodeVec2Parameter_rhlpy")
-nodes/fragment/11/position = Vector2(-1260, -360)
-nodes/fragment/12/node = SubResource("VisualShaderNodeVectorOp_3swhg")
-nodes/fragment/12/position = Vector2(-800, -200)
-nodes/fragment/13/node = SubResource("VisualShaderNodeVec2Parameter_2ffrr")
-nodes/fragment/13/position = Vector2(-880, 580)
-nodes/fragment/14/node = SubResource("VisualShaderNodeVectorDecompose_80eum")
-nodes/fragment/14/position = Vector2(-600, 660)
-nodes/fragment/connections = PackedInt32Array(2, 0, 3, 0, 4, 0, 2, 0, 8, 0, 9, 1, 7, 0, 9, 0, 9, 0, 10, 0, 11, 0, 12, 0, 3, 0, 12, 1, 10, 0, 0, 0, 12, 0, 6, 0, 13, 0, 14, 0, 6, 1, 8, 1, 6, 0, 7, 1, 14, 0, 7, 0, 14, 1, 8, 0)
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_vsb8r"]
-shader = SubResource("VisualShader_fanq1")
-shader_parameter/RimSize = Vector2(40, 40)
-shader_parameter/Size = Vector2(50, 50)
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_eujuu"]
+shader = ExtResource("1_1tows")
+shader_parameter/Scaling = Vector2(20, 20)
+shader_parameter/Texture2DParameter = ExtResource("2_3ddqe")
 
 [node name="MainScene" type="Node2D"]
+
+[node name="BG" type="Sprite2D" parent="."]
+texture_filter = 1
+texture_repeat = 3
+material = SubResource("ShaderMaterial_eujuu")
+scale = Vector2(20, 20)
+texture = ExtResource("2_vyu6f")
+
+[node name="TransitionManager" type="Node2D" parent="."]
+script = ExtResource("1_nc1nq")
+
+[node name="LoadinTimer" type="Timer" parent="TransitionManager"]
+
+[node name="OpenScene" type="Node2D" parent="."]
 
 [node name="Player" parent="." instance=ExtResource("1_x8v6x")]
 
 [node name="Camera2D" type="Camera2D" parent="."]
+script = ExtResource("6_niq3y")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 
-[node name="StaticBody2D" type="StaticBody2D" parent="."]
-position = Vector2(0, 306)
-scale = Vector2(28.8307, 0.757158)
+[node name="BlockPassable" parent="." instance=ExtResource("4_um7c8")]
+position = Vector2(-7.62939e-06, 102)
+scale = Vector2(20, 2)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
-position = Vector2(7.19415e-07, -1)
-shape = SubResource("RectangleShape2D_w5ghk")
+[node name="Target" parent="." instance=ExtResource("5_yhgs3")]
+position = Vector2(387, -22)
 
-[node name="Sprite2D" type="Sprite2D" parent="StaticBody2D"]
-texture = ExtResource("4_d3o6l")
-
-[node name="StaticBody2D4" type="StaticBody2D" parent="."]
-position = Vector2(0, 92)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D4"]
-position = Vector2(22.5, 0)
-shape = SubResource("RectangleShape2D_dfsfd")
-
-[node name="Sprite2D" type="Sprite2D" parent="StaticBody2D4"]
-material = SubResource("ShaderMaterial_b871n")
-scale = Vector2(2, 2)
-texture = ExtResource("4_d3o6l")
-
-[node name="Sprite2D2" type="Sprite2D" parent="StaticBody2D4"]
-material = SubResource("ShaderMaterial_vsb8r")
-position = Vector2(70, 25)
-texture = ExtResource("4_d3o6l")
-
-[node name="Sprite2D3" type="Sprite2D" parent="StaticBody2D4"]
-material = SubResource("ShaderMaterial_vsb8r")
-position = Vector2(70, -25)
-texture = ExtResource("4_d3o6l")
-
-[node name="StaticBody2D2" type="StaticBody2D" parent="."]
-position = Vector2(-558, 81)
-rotation = 1.5708
-scale = Vector2(28.8307, 0.757158)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D2"]
-position = Vector2(7.19415e-07, -1)
-shape = SubResource("RectangleShape2D_w5ghk")
-
-[node name="Sprite2D" type="Sprite2D" parent="StaticBody2D2"]
-texture = ExtResource("4_d3o6l")
-
-[node name="StaticBody2D3" type="StaticBody2D" parent="."]
-position = Vector2(555, 81)
-rotation = 1.5708
-scale = Vector2(28.8307, 0.757158)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D3"]
-position = Vector2(7.19415e-07, -1)
-shape = SubResource("RectangleShape2D_w5ghk")
-
-[node name="Sprite2D" type="Sprite2D" parent="StaticBody2D3"]
-texture = ExtResource("4_d3o6l")
+[node name="Line2D" type="Line2D" parent="."]
+position = Vector2(-7.62939e-06, 102)
+points = PackedVector2Array(500, 50, -500, 50, -500, -50, 500, -50)
+closed = true
+width = 2.0
+default_color = Color(0, 0, 0, 1)

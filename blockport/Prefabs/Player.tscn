@@ -6,7 +6,7 @@
 [ext_resource type="Script" path="res://Scripts/SpriteMatUpdateer.gd" id="4_i8rcm"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_r37d3"]
-size = Vector2(64, 63)
+size = Vector2(64, 64)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_kgenl"]
 shader = ExtResource("2_pdna8")
@@ -42,7 +42,6 @@ wait_time = 0.05
 one_shot = true
 
 [node name="PlayerCollider" type="CollisionShape2D" parent="."]
-position = Vector2(0, 0.5)
 shape = SubResource("RectangleShape2D_r37d3")
 
 [node name="PlayerSprite" type="Sprite2D" parent="." node_paths=PackedStringArray("jumpTimer")]

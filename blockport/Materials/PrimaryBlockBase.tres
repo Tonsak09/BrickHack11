@@ -1,0 +1,21 @@
+[gd_resource type="ShaderMaterial" load_steps=6 format=3 uid="uid://di2kc87qs3725"]
+
+[ext_resource type="Shader" uid="uid://npqd2amgpctx" path="res://Shaders/Block.tres" id="1_ttg4y"]
+[ext_resource type="Texture2D" uid="uid://k4uflwi3vles" path="res://Textures/SimplyPatterns.png" id="2_c86y0"]
+
+[sub_resource type="Gradient" id="Gradient_1ddte"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_hs41w"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_77j3b"]
+color_ramp = SubResource("Gradient_1ddte")
+noise = SubResource("FastNoiseLite_hs41w")
+
+[resource]
+shader = ExtResource("1_ttg4y")
+shader_parameter/PaletteCount = 5
+shader_parameter/CellCount = 20.0
+shader_parameter/ScreenRatio = Vector2(1200, 650)
+shader_parameter/ScrollSpeed = 0.2
+shader_parameter/PalleteNoise = SubResource("NoiseTexture2D_77j3b")
+shader_parameter/PatternPalette = ExtResource("2_c86y0")

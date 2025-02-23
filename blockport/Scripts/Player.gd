@@ -19,9 +19,6 @@ extends CharacterBody2D
 @export var floorCheck : Area2D
 @export var slideSpeed : float 
 
-@export_category("Passthrough")
-@export var passthroughCheker : ShapeCast2D
-
 @export_category("Particles")
 @export var rightTrail : CPUParticles2D
 @export var leftTrail : CPUParticles2D
