@@ -43,6 +43,7 @@ var moveState : PlayerMoveStates
 func _init() -> void:
 	grounded = false 
 	#moveState = PlayerMoveStates.FREE
+	Input.mouse_mode = Input.MOUSE_MODE_HIDDEN
 
 
 func _process(delta: float) -> void:
@@ -130,7 +131,7 @@ func FreeMovement(delta):
 				wallSlideTimer.start()
 		
 	
-	velocity -= Vector2(velocity.x, 0) * resistance * delta;
+	velocity = Vector2(velocity.x * resistance * delta, velocity.y);  
 	yVelHold = (yVelHold + velocity.y) / 2.0 # If player is still long enough 
 	
 	move_and_slide() 
