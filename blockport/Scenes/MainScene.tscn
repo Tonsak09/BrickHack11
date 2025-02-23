@@ -803,7 +803,7 @@ offset_left = 185.0
 offset_top = -121.0
 offset_right = 634.0
 offset_bottom = 19.0
-text = "Hold Z and then X to pass through a wall"
+text = "Hold Z and then X to pass through a wall in the direction you are facing"
 label_settings = SubResource("LabelSettings_78s2e")
 horizontal_alignment = 3
 vertical_alignment = 1
@@ -1078,7 +1078,6 @@ metadata/Danger = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Danger/StaticBody2D2"]
 position = Vector2(0, -0.000152588)
-scale = Vector2(1, 1)
 shape = SubResource("RectangleShape2D_8awr8")
 
 [node name="BlockPassable3" type="Sprite2D" parent="."]
@@ -1104,7 +1103,6 @@ texture = ExtResource("15_l3jks")
 rotation = 1.5708
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="BlockPassable4/StaticBody2D2"]
-scale = Vector2(1, 1)
 shape = SubResource("RectangleShape2D_3ndu5")
 
 [node name="BlockPassable5" type="Sprite2D" parent="."]
@@ -1117,7 +1115,6 @@ texture = ExtResource("15_l3jks")
 rotation = 1.5708
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="BlockPassable5/StaticBody2D2"]
-scale = Vector2(1, 1)
 shape = SubResource("RectangleShape2D_3ndu5")
 
 [node name="BlockPassable6" type="Sprite2D" parent="."]
@@ -1130,7 +1127,6 @@ texture = ExtResource("15_l3jks")
 rotation = 1.5708
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="BlockPassable6/StaticBody2D2"]
-scale = Vector2(1, 1)
 shape = SubResource("RectangleShape2D_3ndu5")
 
 [node name="BlockPassable7" type="Sprite2D" parent="."]
@@ -1143,7 +1139,6 @@ texture = ExtResource("15_l3jks")
 rotation = 1.5708
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="BlockPassable7/StaticBody2D2"]
-scale = Vector2(1, 1)
 shape = SubResource("RectangleShape2D_3ndu5")
 
 [node name="BlockPassable8" type="Sprite2D" parent="."]
@@ -1156,7 +1151,6 @@ texture = ExtResource("15_l3jks")
 rotation = 1.5708
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="BlockPassable8/StaticBody2D2"]
-scale = Vector2(1, 1)
 shape = SubResource("RectangleShape2D_3ndu5")
 
 [node name="BlockPassable9" type="Sprite2D" parent="."]
@@ -1169,7 +1163,6 @@ texture = ExtResource("15_l3jks")
 rotation = 1.5708
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="BlockPassable9/StaticBody2D2"]
-scale = Vector2(1, 1)
 shape = SubResource("RectangleShape2D_3ndu5")
 
 [node name="Danger2" type="Sprite2D" parent="."]
@@ -1214,7 +1207,6 @@ texture = ExtResource("15_l3jks")
 rotation = 1.5708
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="BlockPassable10/StaticBody2D2"]
-scale = Vector2(1, 1)
 shape = SubResource("RectangleShape2D_3ndu5")
 
 [node name="BlockPassable11" type="Sprite2D" parent="."]
@@ -1227,7 +1219,6 @@ texture = ExtResource("15_l3jks")
 rotation = 1.5708
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="BlockPassable11/StaticBody2D2"]
-scale = Vector2(1, 1)
 shape = SubResource("RectangleShape2D_3ndu5")
 
 [node name="BlockPassable12" type="Sprite2D" parent="."]
@@ -1240,7 +1231,6 @@ texture = ExtResource("15_l3jks")
 rotation = 1.5708
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="BlockPassable12/StaticBody2D2"]
-scale = Vector2(1, 1)
 shape = SubResource("RectangleShape2D_3ndu5")
 
 [node name="Danger4" type="Sprite2D" parent="."]
@@ -1270,7 +1260,6 @@ rotation = 1.5708
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="BlockPassable13/StaticBody2D2"]
 position = Vector2(0.0157242, 0.000244141)
-scale = Vector2(1, 1)
 shape = SubResource("RectangleShape2D_3ndu5")
 
 [node name="Danger5" type="Sprite2D" parent="."]
@@ -1298,7 +1287,6 @@ texture = ExtResource("15_l3jks")
 rotation = 1.5708
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="BlockPassable14/StaticBody2D2"]
-scale = Vector2(1, 1)
 shape = SubResource("RectangleShape2D_3ndu5")
 
 [node name="Danger6" type="Sprite2D" parent="."]
@@ -1342,7 +1330,6 @@ rotation = 1.5708
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="BlockPassable15/StaticBody2D2"]
 position = Vector2(0.0157242, 0.000244141)
-scale = Vector2(1, 1)
 shape = SubResource("RectangleShape2D_3ndu5")
 
 [node name="Danger8" type="Sprite2D" parent="."]
@@ -1370,7 +1357,6 @@ texture = ExtResource("15_l3jks")
 rotation = 1.5708
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="BlockPassable16/StaticBody2D2"]
-scale = Vector2(1, 1)
 shape = SubResource("RectangleShape2D_3ndu5")
 
 [node name="Camera2D8" type="Camera2D" parent="." node_paths=PackedStringArray("player")]
@@ -1434,7 +1420,6 @@ collision_mask = 2
 metadata/Danger = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Danger9/StaticBody2D2"]
-scale = Vector2(1, 1)
 shape = SubResource("RectangleShape2D_8awr8")
 
 [node name="BlockPassable17" type="Sprite2D" parent="."]
@@ -1448,7 +1433,6 @@ rotation = 1.5708
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="BlockPassable17/StaticBody2D2"]
 position = Vector2(0.0157242, 0.000244141)
-scale = Vector2(1, 1)
 shape = SubResource("RectangleShape2D_3ndu5")
 
 [node name="BlockPassable19" type="Sprite2D" parent="."]
@@ -1462,7 +1446,6 @@ rotation = 1.5708
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="BlockPassable19/StaticBody2D2"]
 position = Vector2(0.0157242, 0.000244141)
-scale = Vector2(1, 1)
 shape = SubResource("RectangleShape2D_3ndu5")
 
 [node name="BlockPassable20" type="Sprite2D" parent="."]
@@ -1476,7 +1459,6 @@ rotation = 1.5708
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="BlockPassable20/StaticBody2D2"]
 position = Vector2(0.0157242, 0.000244141)
-scale = Vector2(1, 1)
 shape = SubResource("RectangleShape2D_3ndu5")
 
 [node name="BlockPassable21" type="Sprite2D" parent="."]
@@ -1490,7 +1472,6 @@ rotation = 1.5708
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="BlockPassable21/StaticBody2D2"]
 position = Vector2(0.0157242, 0.000488281)
-scale = Vector2(1, 1)
 shape = SubResource("RectangleShape2D_3ndu5")
 
 [node name="BlockPassable22" type="Sprite2D" parent="."]
@@ -1504,7 +1485,6 @@ rotation = 1.5708
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="BlockPassable22/StaticBody2D2"]
 position = Vector2(0.0157242, 0.000488281)
-scale = Vector2(1, 1)
 shape = SubResource("RectangleShape2D_3ndu5")
 
 [node name="Danger10" type="Sprite2D" parent="."]
@@ -1565,7 +1545,6 @@ collision_mask = 2
 metadata/Danger = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Danger13/StaticBody2D2"]
-scale = Vector2(1, 1)
 shape = SubResource("RectangleShape2D_8awr8")
 
 [node name="Danger14" type="Sprite2D" parent="."]
@@ -1581,7 +1560,6 @@ collision_mask = 2
 metadata/Danger = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Danger14/StaticBody2D2"]
-scale = Vector2(1, 1)
 shape = SubResource("RectangleShape2D_8awr8")
 
 [node name="BlockPassable23" type="Sprite2D" parent="."]
@@ -1595,7 +1573,6 @@ rotation = 1.5708
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="BlockPassable23/StaticBody2D2"]
 position = Vector2(0.0157242, 0.000244141)
-scale = Vector2(1, 1)
 shape = SubResource("RectangleShape2D_3ndu5")
 
 [node name="BlockPassable24" type="Sprite2D" parent="."]
@@ -1609,7 +1586,6 @@ rotation = 1.5708
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="BlockPassable24/StaticBody2D2"]
 position = Vector2(0.0157242, 0.000244141)
-scale = Vector2(1, 1)
 shape = SubResource("RectangleShape2D_3ndu5")
 
 [node name="BlockPassable25" type="Sprite2D" parent="."]
@@ -1623,21 +1599,19 @@ rotation = 1.5708
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="BlockPassable25/StaticBody2D2"]
 position = Vector2(0.0157242, 0.000244141)
-scale = Vector2(1, 1)
 shape = SubResource("RectangleShape2D_3ndu5")
 
 [node name="BlockPassable26" type="Sprite2D" parent="."]
 modulate = Color(0.529736, 0.7085, 0.76784, 1)
-position = Vector2(9825, 74.4375)
-scale = Vector2(0.999985, 2.9825)
+position = Vector2(9825, -0.500001)
+scale = Vector2(0.999985, 5.98)
 texture = ExtResource("15_l3jks")
 
 [node name="StaticBody2D2" type="StaticBody2D" parent="BlockPassable26"]
 rotation = 1.5708
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="BlockPassable26/StaticBody2D2"]
-position = Vector2(0.0157242, 0.000244141)
-scale = Vector2(1, 1)
+position = Vector2(0.0157242, 0)
 shape = SubResource("RectangleShape2D_3ndu5")
 
 [node name="BlockPassable27" type="Sprite2D" parent="."]
@@ -1651,7 +1625,6 @@ rotation = 1.5708
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="BlockPassable27/StaticBody2D2"]
 position = Vector2(0.0157242, 0.000244141)
-scale = Vector2(1, 1)
 shape = SubResource("RectangleShape2D_3ndu5")
 
 [node name="BlockPassable28" type="Sprite2D" parent="."]
@@ -1665,7 +1638,6 @@ rotation = 1.5708
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="BlockPassable28/StaticBody2D2"]
 position = Vector2(0.0157223, 0.000488281)
-scale = Vector2(1, 1)
 shape = SubResource("RectangleShape2D_3ndu5")
 
 [node name="Danger15" type="Sprite2D" parent="."]
@@ -1681,23 +1653,6 @@ collision_mask = 2
 metadata/Danger = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Danger15/StaticBody2D2"]
-scale = Vector2(1, 1)
-shape = SubResource("RectangleShape2D_8awr8")
-
-[node name="Danger16" type="Sprite2D" parent="."]
-material = SubResource("ShaderMaterial_kfs5e")
-position = Vector2(9825, -75)
-scale = Vector2(0.999995, 3)
-texture = ExtResource("15_l3jks")
-script = ExtResource("17_106df")
-
-[node name="StaticBody2D2" type="StaticBody2D" parent="Danger16"]
-rotation = 1.5708
-collision_mask = 2
-metadata/Danger = false
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Danger16/StaticBody2D2"]
-scale = Vector2(1, 1)
 shape = SubResource("RectangleShape2D_8awr8")
 
 [node name="BlockPassable29" type="Sprite2D" parent="."]
@@ -1711,7 +1666,6 @@ rotation = 1.5708
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="BlockPassable29/StaticBody2D2"]
 position = Vector2(0.0157242, 0.000244141)
-scale = Vector2(1, 1)
 shape = SubResource("RectangleShape2D_3ndu5")
 
 [node name="Danger17" type="Sprite2D" parent="."]
@@ -1727,13 +1681,12 @@ collision_mask = 2
 metadata/Danger = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Danger17/StaticBody2D2"]
-scale = Vector2(1, 1)
 shape = SubResource("RectangleShape2D_8awr8")
 
 [node name="Danger18" type="Sprite2D" parent="."]
 material = SubResource("ShaderMaterial_kfs5e")
-position = Vector2(9875, -0.500011)
-scale = Vector2(0.999995, 5.98)
+position = Vector2(9875, 24)
+scale = Vector2(0.999992, 5)
 texture = ExtResource("15_l3jks")
 script = ExtResource("17_106df")
 
@@ -1743,7 +1696,6 @@ collision_mask = 2
 metadata/Danger = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Danger18/StaticBody2D2"]
-scale = Vector2(1, 1)
 shape = SubResource("RectangleShape2D_8awr8")
 
 [connection signal="body_entered" from="Intro/AreaTrans" to="Intro/AreaTrans" method="Transition"]

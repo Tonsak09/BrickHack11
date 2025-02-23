@@ -70,7 +70,6 @@ collision_layer = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="WallCheck"]
 position = Vector2(-1.57265e-07, 0)
-scale = Vector2(1, 1)
 shape = SubResource("RectangleShape2D_86wrv")
 
 [node name="FloorCheck" type="Area2D" parent="."]

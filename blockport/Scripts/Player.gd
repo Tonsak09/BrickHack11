@@ -50,13 +50,7 @@ func _process(delta: float) -> void:
 	if Input.is_action_just_pressed("Close"):
 		get_tree().quit() 
 	
-	match moveState:
-		PlayerMoveStates.FREE:
-			FreeMovement(delta)
-		PlayerMoveStates.CLUNG:
-			ClungMovement(delta)
-		PlayerMoveStates.PASSING:
-			pass  
+	
 	
 	
 	if velocity.x <= -10:
@@ -70,7 +64,13 @@ func _process(delta: float) -> void:
 		leftTrail.emitting = false 
 
 func _physics_process(delta: float) -> void:
-	pass
+	match moveState:
+		PlayerMoveStates.FREE:
+			FreeMovement(delta)
+		PlayerMoveStates.CLUNG:
+			ClungMovement(delta)
+		PlayerMoveStates.PASSING:
+			pass  
 	
 	
 
