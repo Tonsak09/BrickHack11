@@ -16,6 +16,6 @@ shader = ExtResource("1_ttg4y")
 shader_parameter/PaletteCount = 5
 shader_parameter/CellCount = 20.0
 shader_parameter/ScreenRatio = Vector2(1200, 650)
-shader_parameter/ScrollSpeed = 0.2
+shader_parameter/ScrollSpeed = 0.115
 shader_parameter/PalleteNoise = SubResource("NoiseTexture2D_77j3b")
 shader_parameter/PatternPalette = ExtResource("2_c86y0")

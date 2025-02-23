@@ -103,7 +103,7 @@ func FreeMovement(delta):
 		elif wallRight.has_overlapping_bodies():
 			velocity.y = slideSpeed
 	
-	velocity -= Vector2(velocity.x, 0) * resistance;
+	velocity -= Vector2(velocity.x, 0) * resistance * delta;
 	yVelHold = (yVelHold + velocity.y) / 2.0 # If player is still long enough 
 	
 	move_and_slide() 

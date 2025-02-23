@@ -35,9 +35,6 @@ func _process(delta: float) -> void:
 	
 	#position.y =  get_rect().size.y
 	if !jumpTimer.is_stopped():
-		
-		print_debug(jumpTimer.wait_time / jumpTimer.time_left)
-		
 		scale = lerp(targetScale, squashScale, clampf(jumpTimer.wait_time / jumpTimer.time_left, 0, 1))
 	else: 
 		scale = lerp(scale, targetScale, squishBackSpeed * delta)

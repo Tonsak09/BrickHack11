@@ -18,7 +18,7 @@ size = Vector2(70, 68)
 
 [node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("wallSlideTimer", "jumpTimer", "wallCheck", "wallLeft", "wallRight", "floorCheck", "rightTrail", "leftTrail", "playerSprite")]
 position = Vector2(0, -50)
-collision_layer = 0
+collision_layer = 2
 script = ExtResource("1_0jo6a")
 accel = 30000.0
 maxSpeed = 2.0

@@ -1,0 +1,74 @@
+[gd_scene load_steps=8 format=3 uid="uid://dsiowl7moug1r"]
+
+[ext_resource type="PackedScene" uid="uid://b7yudnxeaviqa" path="res://Prefabs/BlockPassable.tscn" id="1_es0hi"]
+[ext_resource type="Script" path="res://Scenes/TutPopup.gd" id="2_sogsg"]
+[ext_resource type="Script" path="res://Scenes/Bobbing.gd" id="3_4wkgs"]
+[ext_resource type="Texture2D" uid="uid://c632xigu30fmn" path="res://Textures/BoxClippy.png" id="4_e27x8"]
+[ext_resource type="FontFile" uid="uid://c8u2j24f6bwrk" path="res://Fonts/Tahoma Regular font.ttf" id="5_mey8d"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_78s2e"]
+font = ExtResource("5_mey8d")
+font_size = 32
+font_color = Color(0, 0, 0, 1)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_2h6q7"]
+radius = 113.442
+
+[node name="LV1" type="Node2D"]
+visible = false
+
+[node name="BlockPassable" parent="." instance=ExtResource("1_es0hi")]
+position = Vector2(-7.62939e-06, 102)
+scale = Vector2(20, 2)
+
+[node name="TutPopup" type="Node2D" parent="." node_paths=PackedStringArray("visual")]
+position = Vector2(-399, 0)
+script = ExtResource("2_sogsg")
+visual = NodePath("VisualFolder")
+shiftSpeed = 1.0
+
+[node name="VisualFolder" type="Node2D" parent="TutPopup"]
+position = Vector2(0, -177)
+script = ExtResource("3_4wkgs")
+speed = 1.0
+mag = 10.0
+
+[node name="BoxClippy" type="Sprite2D" parent="TutPopup/VisualFolder"]
+position = Vector2(399, 34)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("4_e27x8")
+
+[node name="ColorRect" type="ColorRect" parent="TutPopup/VisualFolder"]
+visible = false
+offset_left = -123.0
+offset_top = -77.0
+offset_right = 113.0
+offset_bottom = 84.0
+
+[node name="Label" type="Label" parent="TutPopup/VisualFolder"]
+offset_left = 185.0
+offset_top = -121.0
+offset_right = 634.0
+offset_bottom = 19.0
+text = "Arrow keys are used to move. Use them to move. ;>"
+label_settings = SubResource("LabelSettings_78s2e")
+horizontal_alignment = 3
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="Area2D" type="Area2D" parent="TutPopup"]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TutPopup/Area2D"]
+shape = SubResource("CircleShape2D_2h6q7")
+
+[node name="Line2D" type="Line2D" parent="."]
+position = Vector2(-7.62939e-06, 102)
+points = PackedVector2Array(500, 50, -500, 50, -500, -50, 500, -50)
+closed = true
+width = 2.0
+default_color = Color(0, 0, 0, 1)
+
+[connection signal="body_entered" from="TutPopup/Area2D" to="TutPopup" method="_on_area_2d_body_entered"]
+[connection signal="body_exited" from="TutPopup/Area2D" to="TutPopup" method="_on_area_2d_body_exited"]
