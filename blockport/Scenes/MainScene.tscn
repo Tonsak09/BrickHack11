@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://btxekcvieocq5"]
+[gd_scene load_steps=22 format=3 uid="uid://btxekcvieocq5"]
 
 [ext_resource type="Shader" uid="uid://cfop3o8vccnra" path="res://Shaders/BG.tres" id="1_1tows"]
 [ext_resource type="Script" path="res://Scripts/TransitionManager.gd" id="1_nc1nq"]
@@ -14,6 +14,7 @@
 [ext_resource type="Script" path="res://Scenes/TutPopup.gd" id="10_0nf4m"]
 [ext_resource type="Script" path="res://Scripts/AreaTrans.gd" id="12_5wweg"]
 [ext_resource type="Texture2D" uid="uid://c632xigu30fmn" path="res://Textures/BoxClippy.png" id="13_qcbk7"]
+[ext_resource type="Texture2D" uid="uid://cgkfmlgju2yy5" path="res://Textures/Square.png" id="15_l3jks"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_eujuu"]
 shader = ExtResource("1_1tows")
@@ -33,6 +34,9 @@ size = Vector2(20, 724)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ndujy"]
 size = Vector2(20, 100000)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3ndu5"]
+size = Vector2(50.0002, 49.9998)
 
 [node name="MainScene" type="Node2D"]
 
@@ -404,6 +408,18 @@ position = Vector2(7204, 0)
 script = ExtResource("6_niq3y")
 player = NodePath("../Player")
 speed = 3.0
+
+[node name="BlockPassable2" type="Sprite2D" parent="."]
+position = Vector2(164, 11)
+scale = Vector2(1.5, 1.5)
+texture = ExtResource("15_l3jks")
+
+[node name="StaticBody2D2" type="StaticBody2D" parent="BlockPassable2"]
+rotation = 1.5708
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BlockPassable2/StaticBody2D2"]
+position = Vector2(0, -3.8147e-06)
+shape = SubResource("RectangleShape2D_3ndu5")
 
 [connection signal="body_entered" from="Intro/AreaTrans" to="Intro/AreaTrans" method="Transition"]
 [connection signal="body_entered" from="Intro/AreaTrans2" to="Intro/AreaTrans2" method="Transition"]
