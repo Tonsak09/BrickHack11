@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://d0lq1qmpbwv7b"]
+[gd_scene load_steps=9 format=3 uid="uid://d0lq1qmpbwv7b"]
 
 [ext_resource type="Script" path="res://Scripts/Player.gd" id="1_0jo6a"]
 [ext_resource type="Shader" uid="uid://h442157yhanu" path="res://Shaders/PlayerShader.tres" id="2_pdna8"]
@@ -12,6 +12,9 @@ size = Vector2(64, 64)
 shader = ExtResource("2_pdna8")
 shader_parameter/Pupil = Color(0, 0.660554, 0.660957, 1)
 shader_parameter/PupilOffset = null
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_86wrv"]
+size = Vector2(51.0105, 50.7681)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_orn0e"]
 size = Vector2(70, 68)
@@ -66,7 +69,9 @@ scale = Vector2(1.13702, 1.14245)
 collision_layer = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="WallCheck"]
-shape = SubResource("RectangleShape2D_orn0e")
+position = Vector2(-1.57265e-07, 0)
+scale = Vector2(1, 1)
+shape = SubResource("RectangleShape2D_86wrv")
 
 [node name="FloorCheck" type="Area2D" parent="."]
 position = Vector2(0, 35)

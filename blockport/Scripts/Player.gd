@@ -26,6 +26,9 @@ extends CharacterBody2D
 @export_category("SquishSquash")
 @export var playerSprite : Sprite2D
 
+@export_category("Scene")
+@export var sceneManager : Node2D
+
 var vel : Vector2 
 var grounded : bool 
 
@@ -43,6 +46,10 @@ func _init() -> void:
 
 
 func _process(delta: float) -> void:
+	
+	if Input.is_action_just_pressed("Close"):
+		get_tree().quit() 
+	
 	match moveState:
 		PlayerMoveStates.FREE:
 			FreeMovement(delta)
@@ -100,8 +107,28 @@ func FreeMovement(delta):
 		if wallLeft.has_overlapping_bodies():
 			velocity.y = slideSpeed
 			
+			if Input.is_action_just_pressed("Jump") && wallSlideTimer.is_stopped():
+				var dirA = Vector2(
+					Input.get_axis("ui_left", "ui_right"), 
+					-1.0).normalized()
+				
+				playerSprite.Squash()
+				
+				velocity = Vector2(dirA.x * wallJumpSpeed.x, dirA.y * wallJumpSpeed.y)
+				wallSlideTimer.start()
+			
 		elif wallRight.has_overlapping_bodies():
 			velocity.y = slideSpeed
+			if Input.is_action_just_pressed("Jump") && wallSlideTimer.is_stopped():
+				var dirA = Vector2(
+					Input.get_axis("ui_left", "ui_right"), 
+					-1.0).normalized()
+				
+				playerSprite.Squash()
+				
+				velocity = Vector2(dirA.x * wallJumpSpeed.x, dirA.y * wallJumpSpeed.y)
+				wallSlideTimer.start()
+		
 	
 	velocity -= Vector2(velocity.x, 0) * resistance * delta;
 	yVelHold = (yVelHold + velocity.y) / 2.0 # If player is still long enough 
@@ -139,6 +166,10 @@ func Jump():
 
 func DetectCollision(body : Node2D):
 	grounded = true
+	
+	if body.has_meta("Danger"):
+		velocity = Vector2.ZERO
+		sceneManager.RespawnPlayer()
 
 func DetectCollisionLeave(body : Node2D):
 	grounded = false 

@@ -3,8 +3,8 @@
 [ext_resource type="Material" uid="uid://di2kc87qs3725" path="res://Materials/PrimaryBlockBase.tres" id="1_a5h5k"]
 [ext_resource type="Texture2D" uid="uid://cgkfmlgju2yy5" path="res://Textures/Square.png" id="2_5aefn"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_3ndu5"]
-size = Vector2(50.0002, 49.9998)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8awr8"]
+size = Vector2(50, 50)
 
 [node name="BlockPassable" type="Sprite2D"]
 material = ExtResource("1_a5h5k")
@@ -17,4 +17,4 @@ rotation = 1.5708
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D2"]
 position = Vector2(0, -3.8147e-06)
-shape = SubResource("RectangleShape2D_3ndu5")
+shape = SubResource("RectangleShape2D_8awr8")

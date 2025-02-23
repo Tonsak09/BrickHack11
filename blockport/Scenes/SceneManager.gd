@@ -1,12 +1,16 @@
 extends Node2D
 
+@export var player : Node2D
+var spawnPoint : Vector2
+
 #@export var levels : Array[]
 
-# Called when the node enters the scene tree for the first time.
+
 func _ready() -> void:
-	pass # Replace with function body.
+	spawnPoint = player.global_position
+	
+func AdjustSpawnPoint(pos : Vector2):
+	spawnPoint = pos 
 
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
+func RespawnPlayer():
+	player.global_position = spawnPoint 
