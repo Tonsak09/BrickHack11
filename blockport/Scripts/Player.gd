@@ -10,6 +10,7 @@ extends CharacterBody2D
 @export var wallJumpSpeed : Vector2 
 
 @export var wallSlideTimer : Timer
+@export var jumpTimer : Timer 
 
 @export_category("Cling")
 @export var wallCheck : Area2D
@@ -24,6 +25,9 @@ extends CharacterBody2D
 @export_category("Particles")
 @export var rightTrail : CPUParticles2D
 @export var leftTrail : CPUParticles2D
+
+@export_category("SquishSquash")
+@export var playerSprite : Sprite2D
 
 var vel : Vector2 
 var grounded : bool 
@@ -55,7 +59,6 @@ func _process(delta: float) -> void:
 		rightTrail.emitting = true 
 		leftTrail.emitting = false  
 	elif velocity.x >= 10:
-		print_debug(velocity.x)
 		rightTrail.emitting = false  
 		leftTrail.emitting = true 
 	else :
@@ -73,19 +76,18 @@ func FreeMovement(delta):
 	# Add the gravity.
 	if not is_on_floor():
 		velocity += Vector2(0, gravity) * delta
-
+	
 	# Handle jump.
 	if Input.is_action_just_pressed("ui_accept") and is_on_floor():
 		velocity.y = jumpSpeed
-
+	
 	# X axis input 
 	var dir = Vector2(Input.get_axis("ui_left", "ui_right"), 0.0).normalized();
 	
 	
 	# Try to jump 
 	if (grounded || abs(yVelHold) <= 0.001) && Input.is_action_pressed("Jump") && floorCheck.has_overlapping_bodies():
-		velocity.y = jumpSpeed
-		grounded = false 
+		jumpTimer.start()
 	
 	# Movement input 
 	if dir:
@@ -117,7 +119,9 @@ func ClungMovement(delta):
 	if Input.is_action_just_pressed("Jump") && wallSlideTimer.is_stopped():
 		var dir = Vector2(
 			Input.get_axis("ui_left", "ui_right"), 
-			-1.0).normalized(); 
+			-1.0).normalized()
+		
+		playerSprite.Squash()
 		
 		velocity = Vector2(dir.x * wallJumpSpeed.x, dir.y * wallJumpSpeed.y)
 		wallSlideTimer.start()
@@ -127,12 +131,14 @@ func ClungMovement(delta):
 		var dir = Vector2(Input.get_axis("ui_left", "ui_right"), 0);
 		if dir.x > 0:
 			if wallRight.has_overlapping_bodies():
-				print_debug(wallRight.get_overlapping_bodies()[0].get_child(0).shape.get_rect().size)
 				global_position += Vector2(abs(wallRight.get_overlapping_bodies()[0].get_child(0).global_position.x - global_position.x) * 2.0, 0)
 		else:
 			if wallLeft.has_overlapping_bodies():
-				print_debug(wallLeft.get_overlapping_bodies()[0])
 				global_position -= Vector2(abs(wallLeft.get_overlapping_bodies()[0].get_child(0).global_position.x - global_position.x) * 2.0, 0)
+
+func Jump():
+	velocity.y = jumpSpeed
+	grounded = false  
 
 func DetectCollision(body : Node2D):
 	grounded = true
